@@ -12,10 +12,8 @@
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Install](#install)
-  - [Usage](#usage)
   - [Run tests](#run-tests)
   - [Deployment](#triangular_flag_on_post-deployment)
 - [👥 Authors](#authors)
@@ -80,32 +78,12 @@ Example command:
 ```
  -->
 
-### Setup
-
-<!--
-Example commands:
-```sh
-  cd my-folder
-  git clone git@github.com:myaccount/my-project.git
-```
---->
-
 ### Install
 
 Install this project with:
 
-cd my-project
-gem install
-
-### Usage
-
-To run the project, execute the following command:
-
-Open git bash and run the followind commands:
-
-> git init
-> cd my-project
-> code .
+cd todolist
+npm install
 
 ### Run tests
 
@@ -139,6 +117,7 @@ Project not yet to be deployed
 
 ## 🤝 Contributing <a name="contributing"></a>
 
+Feel free to check the [issues page](https://github.com/ybadr99/todolist-js/issues).
 Contributions, issues, and feature requests are welcome!
 
 <!-- SUPPORT -->
