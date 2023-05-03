@@ -94,8 +94,8 @@ Example commands:
 
 Install this project with:
 
-cd my-project
-gem install
+cd todolist
+npm install
 
 ### Usage
 
@@ -139,6 +139,7 @@ Project not yet to be deployed
 
 ## 🤝 Contributing <a name="contributing"></a>
 
+Feel free to check the [issues page](https://github.com/ybadr99/todolist-js/issues).
 Contributions, issues, and feature requests are welcome!
 
 <!-- SUPPORT -->
