@@ -34,11 +34,12 @@ li:last-child {
 .text-input {
   padding: 6px;
   width: 100%;
+  font-size: 18px;
+
 }
 
 .text-input::placeholder {
   font-style: italic;
-  font-size: 18px;
 }
 
 .text-input,
@@ -50,9 +51,17 @@ li:last-child {
 
 .clear {
   text-align: center;
-  color: #787878;
   background-color: #dddddd9c;
   cursor: pointer;
+}
+
+.clear a {
+  text-decoration: none;
+  color: #787878;
+} 
+
+.clear a:hover {
+  text-decoration: underline;
 }
 
 .todo {
