@@ -24,3 +24,21 @@ export const editTodo = (id, desc) => {
 const reoderArrIndexes = () => todos.forEach((a, i)=>{
     a.id = i
 })
+
+
+export const renderTodos = () => {
+    document.querySelector('.todos').innerHTML = '';
+    if (todos) {
+      todos.forEach((todo) => {
+        const todoEl = `<li class="todo">
+        <div> 
+            <input class="completed-btn" type="checkbox"> 
+            <p>${todo.desc}</p> 
+        </div>
+        <i class="uil uil-draggabledots"></i>
+        </li>`
+        document.querySelector('.todos').innerHTML += todoEl
+      });
+    }
+  };
+  
