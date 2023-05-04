@@ -1,9 +1,9 @@
 import { getTodos, save } from './data.js';
 
-const todos = getTodos();
+let todos = getTodos();
 
 export const addTodo = (desc) => {
-  todos.push({ id: todos.length, desc, completed: false });
+  todos.push({ id: todos.length+1, desc, completed: false });
   save(todos);
 };
 
@@ -12,17 +12,13 @@ export const deleteTodo = (id) => {
   if (i > -1) todos.splice(i, 1);
   // reOrderIndexes...
   todos.forEach((a, i) => {
-    a.id = i;
+    a.id = i+1;
   });
   // save
   save(todos);
 };
 
-export const editTodo = (id, desc) => {
-  const todo = todos.find((todo) => todo.id === id);
-  todo.desc = desc;
-  save(todos);
-};
+
 
 export const renderTodos = () => {
   document.querySelector('.todos').innerHTML = '';
@@ -31,11 +27,52 @@ export const renderTodos = () => {
       const todoEl = `<li class="todo">
         <div> 
             <input class="completed-btn" type="checkbox"> 
-            <p>${todo.desc}</p> 
+            <input class="text-input input-field" id='${todo.id}' value='${todo.desc}'></input> 
         </div>
         <i class="uil uil-draggabledots"></i>
         </li>`;
-      document.querySelector('.todos').innerHTML += todoEl;
-    });
-  }
+
+        document.querySelector('.todos').innerHTML += todoEl;
+      });
+    }
+  editInput()
+
 };
+
+
+
+
+const editInput = () => {
+  const inputEls = document.querySelectorAll('.input-field');
+  
+  inputEls.forEach((inputEl)=>{
+    inputEl.addEventListener('focusin', ()=>{
+      inputEl.classList.add('active');
+      inputEl.parentElement.parentElement.classList.add('active');
+    })
+
+    inputEl.addEventListener('focusout', ()=>{
+      inputEl.classList.remove('active');      
+      inputEl.parentElement.parentElement.classList.remove('active');
+
+    })
+
+    inputEl.addEventListener('change', (e)=>{
+      editTodo(+inputEl.id, e.target.value)
+    })
+  })
+}
+
+export const editTodo = (id, desc) => {
+  const todo = todos.find((todo) => todo.id === id);
+  todo.desc = desc;
+
+  save(todos);
+};
+
+
+export const deleteAll = () => {
+  todos = [];
+  save(todos);
+  renderTodos();
+}
