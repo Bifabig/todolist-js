@@ -1,34 +1,18 @@
 import './style.css';
+import {
+  addTodo, deleteAll, renderTodos,
+} from './functions.js';
 
-const todos = [
-  {
-    id: 1,
-    description: 'finish todo project',
-    compeleted: false,
-  },
-  {
-    id: 2,
-    description: 'Task',
-    compeleted: false,
-  },
-  {
-    id: 3,
-    description: 'Task 3',
-    compeleted: false,
-  },
-];
+document.querySelector('.text-input').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    addTodo(e.target.value);
+    renderTodos();
+    e.target.value = '';
+  }
+});
 
-const renderTodos = () => {
-  todos.forEach((todo) => {
-    const todoEl = `<li class="todo">
-      <div> 
-          <input class="completed-btn" type="checkbox"> 
-          <p>${todo.description}</p> 
-      </div>
-      <i class="uil uil-draggabledots"></i>
-    </li>`;
-    document.querySelector('.todos').innerHTML += (todoEl);
-  });
-};
+document.querySelector('.clear-btn').addEventListener('click', () => {
+  deleteAll();
+});
 
 renderTodos();

@@ -17,7 +17,7 @@ ul {
 
 .container {
   max-width: 600px;
-  margin: 200px auto;
+  margin: 100px auto;
   box-shadow: 0 0 5px #787878;
   overflow: hidden;
 }
@@ -34,11 +34,11 @@ li:last-child {
 .text-input {
   padding: 6px;
   width: 100%;
+  font-size: 18px;
 }
 
 .text-input::placeholder {
   font-style: italic;
-  font-size: 18px;
 }
 
 .text-input,
@@ -46,13 +46,22 @@ li:last-child {
   outline: none;
   border: none;
   height: 100%;
+  width: 100%;
 }
 
 .clear {
   text-align: center;
-  color: #787878;
   background-color: #dddddd9c;
   cursor: pointer;
+}
+
+.clear a {
+  text-decoration: none;
+  color: #787878;
+}
+
+.clear a:hover {
+  text-decoration: underline;
 }
 
 .todo {
@@ -65,12 +74,26 @@ li:last-child {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 .option-btn {
   font-size: 24px;
 }
 
+i {
+  width: 20px;
+  font-size: 18px;
+}
+
 i:hover {
-  cursor: move;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #fffeca;
+}
+
+.hide {
+  display: none;
 }
