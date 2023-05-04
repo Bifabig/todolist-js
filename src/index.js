@@ -3,7 +3,6 @@ import {
   addTodo, deleteAll, renderTodos,
 } from './functions.js';
 
-
 document.querySelector('.text-input').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     addTodo(e.target.value);
@@ -12,8 +11,8 @@ document.querySelector('.text-input').addEventListener('keypress', (e) => {
   }
 });
 
-document.querySelector('.clear-btn').addEventListener('click', ()=>{
+document.querySelector('.clear-btn').addEventListener('click', () => {
   deleteAll();
-})
+});
 
 renderTodos();

@@ -74,14 +74,18 @@ li:last-child {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 .option-btn {
   font-size: 24px;
 }
-
+i {
+  width: 20px;
+  font-size: 18px;
+}
 i:hover {
-  cursor: move;
+  cursor: pointer;
 }
 
 .active {
