@@ -62,22 +62,45 @@ export const deleteAll = () => {
   renderTodos();
 };
 
+const completedTodo = (id) => {
+  const todo = todos.find((todo) => todo.id === +id);
+  todo.completed = !todo.completed;
+  save(todos);
+}
+
+
+const completeHandler = () => {
+  const checkboxes = document.querySelectorAll('.completed-btn');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', (e) =>{
+      console.log(e.target.id);
+      console.log(e.target.checked);
+      completedTodo(e.target.id);
+      // e.target.checked = ! e.target.checked;
+    });
+  })
+
+}
+
 export const renderTodos = () => {
   document.querySelector('.todos').innerHTML = '';
   if (todos) {
     todos.forEach((todo) => {
       const todoEl = `<li class="todo">
         <div> 
-            <input class="completed-btn" type="checkbox"> 
+            <input class="completed-btn" id='${todo.id}' type="checkbox"> 
             <input class="text-input input-field" id='${todo.id}' value='${todo.desc}'></input> 
         </div>
         <i id="${todo.id}"class="uil uil-trash"></i>
         </li>`;
 
-      document.querySelector('.todos').innerHTML += todoEl;
+        
+        document.querySelector('.todos').innerHTML += todoEl;
+
     });
   }
 
   editInput();
   deleteHandler();
+  completeHandler()
 };

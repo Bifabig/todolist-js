@@ -97,3 +97,8 @@ i:hover {
 .hide {
   display: none;
 }
+
+.crossout {
+  text-decoration: line-through;
+  color:#787878;
+}
