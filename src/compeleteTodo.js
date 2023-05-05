@@ -1,18 +1,17 @@
-import { save, getTodos } from "./data";
-// const todos = getTodos();
+import { save } from './data.js';
 
-export const completeHandler = (todos) => {
-  const checkboxes = document.querySelectorAll(".check-btn");
+const completeHandler = (todos) => {
+  const checkboxes = document.querySelectorAll('.check-btn');
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", (e) => {
+    checkbox.addEventListener('change', (e) => {
       const todo = todos.find((todo) => todo.id === +e.target.id);
 
       if (!todo.completed) {
-        document.querySelector(`.input-${todo.id}`).classList.add("crossout");
+        document.querySelector(`.input-${todo.id}`).classList.add('crossout');
       } else {
         document
           .querySelector(`.input-${todo.id}`)
-          .classList.remove("crossout");
+          .classList.remove('crossout');
       }
 
       todo.completed = !todo.completed;
@@ -20,3 +19,5 @@ export const completeHandler = (todos) => {
     });
   });
 };
+
+export default completeHandler;

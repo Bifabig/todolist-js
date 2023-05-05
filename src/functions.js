@@ -1,22 +1,23 @@
 /* eslint-disable no-use-before-define */
-import { getTodos, save } from "./data.js";
-import { completeHandler } from "./compeleteTodo.js";
+import { getTodos, save } from './data.js';
+import completeHandler from './compeleteTodo.js';
+
 let todos = getTodos();
 
 const editInput = () => {
-  const inputEls = document.querySelectorAll(".input-field");
+  const inputEls = document.querySelectorAll('.input-field');
   inputEls.forEach((inputEl) => {
-    inputEl.addEventListener("focusin", () => {
-      inputEl.classList.add("active");
-      inputEl.parentElement.parentElement.classList.add("active");
+    inputEl.addEventListener('focusin', () => {
+      inputEl.classList.add('active');
+      inputEl.parentElement.parentElement.classList.add('active');
     });
 
-    inputEl.addEventListener("focusout", () => {
-      inputEl.classList.remove("active");
-      inputEl.parentElement.parentElement.classList.remove("active");
+    inputEl.addEventListener('focusout', () => {
+      inputEl.classList.remove('active');
+      inputEl.parentElement.parentElement.classList.remove('active');
     });
 
-    inputEl.addEventListener("change", (e) => {
+    inputEl.addEventListener('change', (e) => {
       editTodo(+inputEl.id, e.target.value);
     });
   });
@@ -30,9 +31,9 @@ export const editTodo = (id, desc) => {
 };
 
 const deleteHandler = () => {
-  const removeBtns = document.querySelectorAll(".uil");
+  const removeBtns = document.querySelectorAll('.uil');
   removeBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener('click', () => {
       removeTodo(+btn.id);
       renderTodos();
     });
@@ -62,7 +63,7 @@ export const deleteAll = () => {
 };
 
 export const renderTodos = () => {
-  document.querySelector(".todos").innerHTML = "";
+  document.querySelector('.todos').innerHTML = '';
   if (todos) {
     todos.forEach((todo) => {
       let inputEl;
@@ -75,15 +76,15 @@ export const renderTodos = () => {
       const todoEl = `<li class="todo">
         <div> 
         <input class="check-btn" id='${todo.id}' ${
-        todo.completed ? "checked" : ""
-      }  type="checkbox"> 
+  todo.completed ? 'checked' : ''
+}  type="checkbox"> 
 
         ${inputEl}
         </div>
         <i id="${todo.id}"class="uil uil-trash"></i>
         </li>`;
 
-      document.querySelector(".todos").innerHTML += todoEl;
+      document.querySelector('.todos').innerHTML += todoEl;
     });
   }
 
