@@ -1,11 +1,11 @@
 /* eslint-disable no-use-before-define */
 import { getTodos, save } from './data.js';
+import completeHandler from './compeleteTodo.js';
 
 let todos = getTodos();
 
 const editInput = () => {
   const inputEls = document.querySelectorAll('.input-field');
-
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener('focusin', () => {
       inputEl.classList.add('active');
@@ -25,7 +25,7 @@ const editInput = () => {
 
 export const editTodo = (id, desc) => {
   const todo = todos.find((todo) => todo.id === id);
-  todo.desc = desc;
+  todo.desc = desc.trim();
 
   save(todos);
 };
@@ -41,7 +41,7 @@ const deleteHandler = () => {
 };
 
 export const addTodo = (desc) => {
-  todos.push({ id: todos.length + 1, desc, completed: false });
+  todos.push({ id: todos.length + 1, desc: desc.trim(), completed: false });
   save(todos);
 };
 
@@ -57,7 +57,7 @@ export const removeTodo = (id) => {
 };
 
 export const deleteAll = () => {
-  todos = [];
+  todos = todos.filter((todo) => !todo.completed);
   save(todos);
   renderTodos();
 };
@@ -66,10 +66,20 @@ export const renderTodos = () => {
   document.querySelector('.todos').innerHTML = '';
   if (todos) {
     todos.forEach((todo) => {
+      let inputEl;
+      if (todo.completed) {
+        inputEl = `<input class="text-input input-field input-${todo.id} crossout" id='${todo.id}' value='${todo.desc}'></input> `;
+      } else {
+        inputEl = `<input class="text-input input-field input-${todo.id}" id='${todo.id}' value='${todo.desc}'></input> `;
+      }
+
       const todoEl = `<li class="todo">
         <div> 
-            <input class="completed-btn" type="checkbox"> 
-            <input class="text-input input-field" id='${todo.id}' value='${todo.desc}'></input> 
+        <input class="check-btn" id='${todo.id}' ${
+  todo.completed ? 'checked' : ''
+}  type="checkbox"> 
+
+        ${inputEl}
         </div>
         <i id="${todo.id}"class="uil uil-trash"></i>
         </li>`;
@@ -80,4 +90,5 @@ export const renderTodos = () => {
 
   editInput();
   deleteHandler();
+  completeHandler(todos);
 };
