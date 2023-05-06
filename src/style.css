@@ -70,6 +70,10 @@ li:last-child {
   align-items: center;
 }
 
+.todo:hover {
+  cursor: move;
+}
+
 .todo > div {
   display: flex;
   align-items: center;
@@ -101,4 +105,16 @@ i:hover {
 .crossout {
   text-decoration: line-through;
   color: #787878;
+}
+
+.todo.dragging {
+  opacity: 0.6;
+}
+
+.todo.dragging :where(.details, i) {
+  opacity: 0;
+}
+
+.message {
+  text-align: center;
 }

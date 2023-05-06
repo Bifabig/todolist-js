@@ -1,23 +1,23 @@
 /* eslint-disable no-use-before-define */
-import { getTodos, save } from './data.js';
-import completeHandler from './compeleteTodo.js';
+import { getTodos, save } from "./data.js";
+import completeHandler from "./compeleteTodo.js";
 
 let todos = getTodos();
 
 const editInput = () => {
-  const inputEls = document.querySelectorAll('.input-field');
+  const inputEls = document.querySelectorAll(".input-field");
   inputEls.forEach((inputEl) => {
-    inputEl.addEventListener('focusin', () => {
-      inputEl.classList.add('active');
-      inputEl.parentElement.parentElement.classList.add('active');
+    inputEl.addEventListener("focusin", () => {
+      inputEl.classList.add("active");
+      inputEl.parentElement.parentElement.classList.add("active");
     });
 
-    inputEl.addEventListener('focusout', () => {
-      inputEl.classList.remove('active');
-      inputEl.parentElement.parentElement.classList.remove('active');
+    inputEl.addEventListener("focusout", () => {
+      inputEl.classList.remove("active");
+      inputEl.parentElement.parentElement.classList.remove("active");
     });
 
-    inputEl.addEventListener('change', (e) => {
+    inputEl.addEventListener("change", (e) => {
       editTodo(+inputEl.id, e.target.value);
     });
   });
@@ -31,9 +31,9 @@ export const editTodo = (id, desc) => {
 };
 
 const deleteHandler = () => {
-  const removeBtns = document.querySelectorAll('.uil');
+  const removeBtns = document.querySelectorAll(".uil");
   removeBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       removeTodo(+btn.id);
       renderTodos();
     });
@@ -41,8 +41,18 @@ const deleteHandler = () => {
 };
 
 export const addTodo = (desc) => {
-  todos.push({ id: todos.length + 1, desc: desc.trim(), completed: false });
-  save(todos);
+  const todo = todos.find((todo) => todo.desc.trim() === desc.trim());
+  console.log(todo);
+  if (!todo) {
+    if (desc.trim()) {
+      todos.push({ id: todos.length + 1, desc: desc.trim(), completed: false });
+      save(todos);
+    } else {
+      showMessage("Please enter a valid todo");
+    }
+  } else {
+    showMessage("this todo has already exist");
+  }
 };
 
 export const removeTodo = (id) => {
@@ -58,12 +68,16 @@ export const removeTodo = (id) => {
 
 export const deleteAll = () => {
   todos = todos.filter((todo) => !todo.completed);
+  // reOrderIndexes...
+  todos.forEach((a, i) => {
+    a.id = i + 1;
+  });
   save(todos);
   renderTodos();
 };
 
 export const renderTodos = () => {
-  document.querySelector('.todos').innerHTML = '';
+  document.querySelector(".todos").innerHTML = "";
   if (todos) {
     todos.forEach((todo) => {
       let inputEl;
@@ -73,22 +87,29 @@ export const renderTodos = () => {
         inputEl = `<input class="text-input input-field input-${todo.id}" id='${todo.id}' value='${todo.desc}'></input> `;
       }
 
-      const todoEl = `<li class="todo">
+      const todoEl = `<li draggable="true" class="todo">
         <div> 
         <input class="check-btn" id='${todo.id}' ${
-  todo.completed ? 'checked' : ''
-}  type="checkbox"> 
+        todo.completed ? "checked" : ""
+      }  type="checkbox"> 
 
         ${inputEl}
         </div>
         <i id="${todo.id}"class="uil uil-trash"></i>
         </li>`;
 
-      document.querySelector('.todos').innerHTML += todoEl;
+      document.querySelector(".todos").innerHTML += todoEl;
     });
   }
 
   editInput();
   deleteHandler();
   completeHandler(todos);
+};
+
+const showMessage = (message) => {
+  document.querySelector(".message").textContent = message;
+  setTimeout(function () {
+    document.querySelector(".message").textContent = "";
+  }, 2000);
 };
